@@ -12,15 +12,15 @@ function createFolder(path) {
 }
 if (!fs.existsSync("./myFolder")) {
     createFolder("./myFolder")
-        .then(() => createFolder("./myFolder/mySecondFolder"))
-        .then(() => createFolder("./myFolder/myThirdFolder"))
+        .then(() => createFolder("./myFolder/secondFolder"))
+        .then(() => createFolder("./myFolder/thirdFolder"))
         .catch((err) => {
             console.log(err)
         })
 }
-fs.writeFile("./myFolder/myThirdFolder/hallo.txt", "mein Text in der Datei hallo.txt", (err) => {
+fs.writeFile("./myFolder/thirdFolder/hallo.txt", "mein Text in der Datei hallo.txt", (err) => {
     if (err) { return }
 })
-fs.writeFile("./myFolder/myThirdFolder/welt.txt", "mein Text2 in der Datei welt.txt", (err) => {
+fs.writeFile("./myFolder/thirdFolder/welt.txt", "mein Text2 in der Datei welt.txt", (err) => {
     if (err) { return }
 })
