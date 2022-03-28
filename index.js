@@ -2,25 +2,34 @@ const fs = require("fs")
 
 function createFolder(path) {
     return new Promise((resolve, reject) => {
-        fs.mkdir(path, (err, data) => {
+        fs.mkdir(path, (err) => {
             if (err) reject(err)
-            else resolve(data)
-            console.log(resolve)
-
+            else resolve()
         })
     })
 }
-if (!fs.existsSync("./myFolder")) {
+
+function createFile(path, fileContent = "") {
+    return new Promise((resolve, reject) => {
+        fs.writeFile(path, fileContent, (err) => {
+            if (err) reject(err)
+            else resolve()
+        })
+    })
+}
+
+function run() {
+    if (fs.existsSync("./myFolder")) {
+        console.log('already there, do nothing')
+        return;
+    }
+
     createFolder("./myFolder")
         .then(() => createFolder("./myFolder/secondFolder"))
         .then(() => createFolder("./myFolder/thirdFolder"))
-        .catch((err) => {
-            console.log(err)
-        })
+        .then(() => createFile("./myFolder/thirdFolder/hallo.txt", "mein Text in der Datei hallo.txt"))
+        .then(() => createFile("./myFolder/thirdFolder/welt.txt", "mein Text2 in der Datei welt.txt"))
+        .catch((err) => console.log(err))
 }
-fs.writeFile("./myFolder/thirdFolder/hallo.txt", "mein Text in der Datei hallo.txt", (err) => {
-    if (err) { return }
-})
-fs.writeFile("./myFolder/thirdFolder/welt.txt", "mein Text2 in der Datei welt.txt", (err) => {
-    if (err) { return }
-})
+
+run()
