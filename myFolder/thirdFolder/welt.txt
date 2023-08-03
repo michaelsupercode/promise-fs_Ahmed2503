@@ -1,1 +1,0 @@
-mein Text2 in der Datei welt.txt
